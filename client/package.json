@@ -4,7 +4,7 @@
   "scripts": {
     "serve": "vite preview",
     "build": "vite build",
-    "dev": "vite"
+    "dev": "vite --host"
   },
   "dependencies": {
     "@mdi/font": "5.9.55",

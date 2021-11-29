@@ -1,0 +1,11 @@
+{
+  "name": "git-lion",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:Eflyax/Git-Lion.git",
+  "author": "Jakub Záruba <jakub.zaruba@orgis.cz>",
+  "license": "MIT",
+  "dependencies": {
+    "nodegit": "^0.27.0"
+  }
+}
