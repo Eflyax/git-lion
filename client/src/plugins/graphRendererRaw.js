@@ -1,10 +1,15 @@
-﻿function o(t) {
+﻿var
+	pathWidth = 4,
+	nodeSize = 7;
+
+function o(t) {
 	t = t && t.getBoundingClientRect();
 	var e = Number(window.scrollX || window.pageXOffset || 0),
 			r = Number(window.scrollY || window.pageYOffset || 0);
+
 	return t && {
-			left: t.left + e,
-			top: t.top + r
+		left: t.left + e,
+		top: t.top + r
 	}
 }
 
@@ -85,7 +90,9 @@ function a() {
 					g = o(b),
 					l = t.commitsList,
 					i = n;
-			n.pathsDrawn = Object.create(null), n.drawPathTo = function(t) {
+
+			n.pathsDrawn = Object.create(null),
+			n.drawPathTo = function(t) {
 				if (!n.pathsDrawn[t.sha1]) {
 					n.pathsDrawn[t.sha1] = !0;
 
@@ -119,11 +126,13 @@ function a() {
 								t == u(n.row, y) ? (o = n.pos(l[n.row + 1]), r = t.col, o.setColor(t.col), n.curveLeft(o, t.col - n.col, t), n.path(o, t.row + 1, t.col, t)) : (p(i) || c && c !== i ? (o.setColor(r), n.curveRight(o, r - n.col, t)) : (n.col = r, n.x = a + e * n.col, s = t.col - n.col, o = n.pos(t)), o.setColor(r), n.path(o, t.row - 1, r, t), n.curveLeft(o, t.col - r, t)), t.colorOverride = r
 						} else s > 0 ? (n.curveRight(o, s, t), n.path(o, t.row, r, t)) : 0 > s ? (n.path(o, t.row - 1, r, t), n.curveLeft(o, s, t)) : n.path(o, t.row, r, t)
 				}
-			}, n.prevParent = function(e) {
+			},
+			n.prevParent = function(e) {
 					if (e && e.sha1 && n.parents && n.parents.length > 1)
 							for (var t = 1; t < n.parents.length; t++)
 									if (e.sha1 === n.parents[t]) return s[n.parents[t - 1]]
-			}, n.plumb = function() {
+			},
+			n.plumb = function() {
 					var h = t.commitsList;
 					if (!n.isPlumbed) {
 							var m = o(n.htmlElement);
@@ -146,14 +155,17 @@ function a() {
 									} else u = i;
 							return n.isPlumbed = !0, u
 					}
-			}, n.draw = function() {
-					if (!n.isDone) {
-							n.isDone = !0;
-							for (var t = 0; n.parents && t < n.parents.length; t++) {
-									var e = s[n.parents[t]];
-									e ? (n.drawPathTo(e), e.draw()) : n.path(n.pos(), n.row + 1, n.col, void 0, !0)
-							}
+			},
+			n.draw = function() {
+				if (!n.isDone) {
+					n.isDone = !0;
+					for (var t = 0; n.parents && t < n.parents.length; t++) {
+						var e = s[n.parents[t]];
+						e
+							? (n.drawPathTo(e), e.draw())
+							: n.path(n.pos(), n.row + 1, n.col, void 0, !0)
 					}
+				}
 			},
 			n.pos = function(a) {
 				var w = null;
@@ -174,23 +186,33 @@ function a() {
 					r.left = function(t) {
 							return [r[0] + 1, r[1] + .75 * c, r[0] + e * t - 1, r[1] + .25 * c, r[0] + e * t, a.y]
 					}, r
-			}, n.curveRight = function(e, a, i) {
-					i && f(n.row + 1, n.col + a, i);
-					var o = e.right(a),
-							t = document.createElementNS(r, "path");
-					t.setAttribute("d", "M" + e.join(",") + "C" + o.join(",")), t.setAttribute("stroke-width", 2), t.setAttribute("stroke-opacity", 1), t.setAttribute("opacity", 1), t.setAttribute("fill", "none"), t.setAttribute("stroke", e.color), n.drawEarlier(t), e[0] = o[o.length - 2], e[1] = o[o.length - 1]
-			}, n.curveLeft = function(e, a) {
-					var o = e.left(a),
-							t = document.createElementNS(r, "path");
-					t.setAttribute("d", "M" + e.join(",") + "C" + o.join(","));
-					t.setAttribute("stroke-width", 2);
-					t.setAttribute("stroke-opacity", 1);
-					t.setAttribute("opacity", 1);
-					t.setAttribute("fill", "none");
-					t.setAttribute("stroke", e.srcColor);
-					n.drawEarlier(t);
-					e[0] = o[o.length - 2];
-					e[1] = o[o.length - 1];
+			},
+			n.curveRight = function(e, a, i) {
+				i && f(n.row + 1, n.col + a, i);
+				var o = e.right(a),
+						t = document.createElementNS(r, "path");
+				t.setAttribute("d", "M" + e.join(",") + "C" + o.join(",")),
+				t.setAttribute("stroke-width", pathWidth),
+				t.setAttribute("stroke-opacity", 1),
+				t.setAttribute("opacity", 1),
+				t.setAttribute("fill", "none"),
+				t.setAttribute("stroke", e.color),
+				n.drawEarlier(t),
+				e[0] = o[o.length - 2],
+				e[1] = o[o.length - 1]
+			},
+			n.curveLeft = function(e, a) {
+				var o = e.left(a),
+						t = document.createElementNS(r, "path");
+				t.setAttribute("d", "M" + e.join(",") + "C" + o.join(","));
+				t.setAttribute("stroke-width", pathWidth);
+				t.setAttribute("stroke-opacity", 1);
+				t.setAttribute("opacity", 1);
+				t.setAttribute("fill", "none");
+				t.setAttribute("stroke", e.srcColor);
+				n.drawEarlier(t);
+				e[0] = o[o.length - 2];
+				e[1] = o[o.length - 1];
 
 			}, n.path = function(o, m, b, s, l) {
 					var c = t.svg,
@@ -199,7 +221,14 @@ function a() {
 							for (var d = n.row + 1; m > d; d++) f(d, b, s);
 					var a = document.createElementNS(r, "path"),
 							i = o.below(m);
-					l && n.row !== u.length - 1 && (i[0] = o[0] + 1.5 * e, i[1] = o[1] + .7 * (i[1] - o[1])), a.setAttribute("d", "M" + o.join(",") + "L" + i.join(",")), a.setAttribute("stroke-width", 2), a.setAttribute("stroke-opacity", 1), l && a.setAttribute("stroke-dasharray", "15,3,3,3,3,3,3,3,3,3,3"), a.setAttribute("opacity", 1), s && s.col && n.col < s.col ? a.setAttribute("stroke", o.color) : a.setAttribute("stroke", o.srcColor), c.appendChild(a), o[1] = i[1];
+					l && n.row !== u.length - 1 && (i[0] = o[0] + 1.5 * e, i[1] = o[1] + .7 * (i[1] - o[1])),
+					a.setAttribute("d", "M" + o.join(",") + "L" + i.join(",")),
+					a.setAttribute("stroke-width", pathWidth),
+					a.setAttribute("stroke-opacity", 1),
+					l && a.setAttribute("stroke-dasharray", "15,3,3,3,3,3,3,3,3,3,3"),
+					a.setAttribute("opacity", 1),
+					s && s.col && n.col < s.col ? a.setAttribute("stroke", o.color) : a.setAttribute("stroke", o.srcColor),
+					c.appendChild(a), o[1] = i[1];
 					var g = c.getAttribute("width");
 					g < o[0] + 15 && c.setAttribute("width", o[0] + 15)
 			}, n.drawEarlier = function(r) {
@@ -212,9 +241,24 @@ function a() {
 							h = i.getAttribute("width"),
 							b = i.getAttribute("height"),
 							o = document.createElementNS(r, "rect");
-					o.id = "R_" + n.sha1, o.setAttribute("x", 0), o.setAttribute("y", Number(e[1] - 14)), o.setAttribute("width", "100%"), o.setAttribute("height", 28), o.setAttribute("stroke", "none"), o.setAttribute("stroke-width", 0), o.setAttribute("fill", "transparent"), i.appendChild(o);
+
+					o.id = "R_" + n.sha1, o.setAttribute("x", 0),
+					o.setAttribute("y", Number(e[1] - 14)),
+					o.setAttribute("width", "100%"),
+					o.setAttribute("height", 28),
+					o.setAttribute("stroke", "none"),
+					o.setAttribute("stroke-width", 0),
+					o.setAttribute("fill", "transparent"),
+					i.appendChild(o);
+
 					var a = document.createElementNS(r, "circle");
-					a.id = "C_" + n.sha1, a.setAttribute("cx", e[0]), a.setAttribute("cy", e[1]), a.setAttribute("r", 4), a.setAttribute("fill", e.color), a.setAttribute("stroke", "none"), i.appendChild(a);
+					a.id = "C_" + n.sha1, a.setAttribute("cx", e[0]),
+					a.setAttribute("cy", e[1]),
+					a.setAttribute("r", nodeSize),
+					a.setAttribute("fill", e.color),
+					a.setAttribute("stroke", "none"),
+					i.appendChild(a);
+
 					var s = n.tags && n.tags.length > 0,
 							m = n.branches && n.branches.length > 0,
 							u = s && m,
@@ -242,7 +286,9 @@ function a() {
 			});
 		}
 
-		t = t.trim(), "(" === t.charAt(0) && (t = t.substr(1)), ")" === t.charAt(t.length - 1) && (t = t.substr(0, t.length - 1)), t = t.trim();
+		t = t.trim(),
+		"(" === t.charAt(0) && (t = t.substr(1)), ")" === t.charAt(t.length - 1) && (t = t.substr(0, t.length - 1)),
+		t = t.trim();
 
 		for (var n = [], a = [], i = t.split(", "), r = 0; r < i.length; r++) {
 			var e = i[r];
@@ -259,10 +305,10 @@ function a() {
 		function A(t) {
 			if (t.branches && t.branches.length > 0) {
 				for (var r = 0; r < t.branches.length; r++) {
-						var e = t.branches[r];
-						if ("origin/master" === e || "master" === e || "HEAD" === e || e.startsWith("HEAD ")) {
-							return !0;
-						}
+					var e = t.branches[r];
+					if ("origin/master" === e || "master" === e || "HEAD" === e || e.startsWith("HEAD ")) {
+						return !0;
+					}
 				}
 				return !1;
 			}
@@ -298,7 +344,8 @@ function a() {
 					};
 					if (i.push(o), s[o.sha1] = o, C && (o.parents = l[1].split(" ")), l[2] && "" !== l[2].trim()) {
 							var g = h(l[2].trim());
-							o.tags = g[0], o.branches = g[1]
+							o.tags = g[0],
+							o.branches = g[1];
 					}
 				}
 			}
@@ -308,66 +355,74 @@ function a() {
 
 			var c = void 0;
 			for (r = 0; r < i.length; r++)
-					if (o = i[r], A(o)) {
-							c = o;
-							break
-					} for (c || (c = i[0]), r = 0; r < (c ? c.row : i.length); r++) o = i[r], o.col++, o.x = a + e * o.col, f(r, 0, c);
+			{
+				if (o = i[r], A(o)) {
+						c = o;
+						break
+				} for (c || (c = i[0]), r = 0; r < (c ? c.row : i.length); r++) o = i[r], o.col++, o.x = a + e * o.col, f(r, 0, c);
 
-				if (c) {
-					var p = c.plumb();
-					if (p) {
-						for (r = p.row + 1; r < i.length; r++) {
-							o = i[r], 0 === o.col && (o.col++, o.x = a + e * o.col)
-						}
+			if (c) {
+				var p = c.plumb();
+				if (p) {
+					for (r = p.row + 1; r < i.length; r++) {
+						o = i[r], 0 === o.col && (o.col++, o.x = a + e * o.col)
 					}
 				}
-			for (r = 0; r < i.length; r++) {
-				i[r].plumb();
 			}
-			for (r = i.length - 1; r >= 0; r--) {
-				i[r].draw();
-			}
-			for (r = i.length - 1; r >= 0; r--) {
-				i[r].circle();
-			}
+		}
+
+		for (r = 0; r < i.length; r++) {
+			i[r].plumb();
+		}
+
+		for (r = i.length - 1; r >= 0; r--) {
+			i[r].draw();
+		}
+
+		for (r = i.length - 1; r >= 0; r--) {
+			i[r].circle();
+		}
 	}
 	var m = [
 		"#298FB2", "#104EF4", "#7A00B5", "#CD005D", "#EB4624", "#BA9A25", "#58A927", "#b08e6a", "#91a8d0", "#f7cac9"
 	],
-			e = 15,
-			c = 35,
-			d = 0,
-			l = [],
-			s = Object.create(null),
-			a = 9,
-			b = function() {
-					var n = t.commitsList;
-					l = [];
-					var e = i();
-					if (e) {
-						for (var m = e[2], f = e[0], u = 0, o = f; o < m.length; o++) {
-							e = m.item(o);
-							var c = e.getAttribute("data-commitid");
-							if (c) {
-								e.classList.remove("focused-commit");
-								var r = n[u];
-								if (!r || r.sha1 !== c) break;
-								var d = e.getElementsByClassName("commit").item(0);
-								d && (r.htmlElement = d.firstChild), r.isDone = !1, r.isPlumbed = !1, r.x = a, r.col = 0, delete r.colorOverride, u++
-							}
-						}
-
-						for (u < n.length && n.splice(u, n.length - o); o < m.length; o++) e = m.item(o), e.classList.remove("focused-commit"), c = e.getAttribute("data-commitid"), c && (d = e.getElementsByClassName("commit").item(0), d && (e.id = "T_" + c, r = {
-							isDone: !1,
-							isPlumbed: !1,
-							sha1: c,
-							x: a,
-							row: n.length,
-							col: 0,
-							htmlElement: d.firstChild
-						}, n.push(r), s[r.sha1] = r));
+	e = 20,
+	c = 35,
+	d = 0,
+	l = [],
+	s = Object.create(null),
+	a = 40, // padding left
+	b = function() {
+		var n = t.commitsList;
+		l = [];
+		var e = i();
+		if (e) {
+			for (var m = e[2], f = e[0], u = 0, o = f; o < m.length; o++) {
+				e = m.item(o);
+				var c = e.getAttribute("data-commitid");
+				if (c) {
+					e.classList.remove("focused-commit");
+					var r = n[u];
+					if (!r || r.sha1 !== c) {
+						break;
 					}
-			};
+
+					var d = e.getElementsByClassName("commit").item(0);
+					d && (r.htmlElement = d.firstChild), r.isDone = !1, r.isPlumbed = !1, r.x = a, r.col = 0, delete r.colorOverride, u++
+				}
+			}
+
+			for (u < n.length && n.splice(u, n.length - o); o < m.length; o++) e = m.item(o), e.classList.remove("focused-commit"), c = e.getAttribute("data-commitid"), c && (d = e.getElementsByClassName("commit").item(0), d && (e.id = "T_" + c, r = {
+				isDone: !1,
+				isPlumbed: !1,
+				sha1: c,
+				x: a,
+				row: n.length,
+				col: 0,
+				htmlElement: d.firstChild
+			}, n.push(r), s[r.sha1] = r));
+		}
+	};
 
 	return b.g = g, b.commitsTable = s, b
 }
