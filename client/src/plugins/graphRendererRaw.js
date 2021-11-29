@@ -86,10 +86,11 @@ function a() {
 	}
 
 	function v(n) {
-			var b = t.svg,
-					g = o(b),
-					l = t.commitsList,
-					i = n;
+			var
+				b = t.svg,
+				g = o(b),
+				l = t.commitsList,
+				i = n;
 
 			n.pathsDrawn = Object.create(null),
 			n.drawPathTo = function(t) {
@@ -133,28 +134,43 @@ function a() {
 									if (e.sha1 === n.parents[t]) return s[n.parents[t - 1]]
 			},
 			n.plumb = function() {
-					var h = t.commitsList;
-					if (!n.isPlumbed) {
-							var m = o(n.htmlElement);
-							n.y = 11 + m.top - g.top;
-							var u = void 0;
-							if (n.parents && n.parents.length > 0)
-									for (var r = 0; r < n.parents.length; r++) {
-											var l = s[n.parents[r]];
-											if (l && !l.isPlumbed) {
-													0 == r ? u = l.plumb() : l.plumb();
-													var m = l.col - n.col,
-															v = l.row - n.row;
-													if (0 === m && (m = r), m >= 0) var b = n.col + m;
-													else b = n.col;
-													for (var f = 1; v > f; f++) {
-															var c = h[n.row + f];
-															c && !c.isPlumbed && (c.col = b + 1, c.x = a + e * c.col, d = Math.max(c.col, d))
-													}
-											} else 0 == r && (u = i)
-									} else u = i;
-							return n.isPlumbed = !0, u
+				var h = t.commitsList;
+				if (!n.isPlumbed) {
+					var m = o(n.htmlElement);
+					n.y = 11 + m.top - g.top;
+					var u = void 0;
+					if (n.parents && n.parents.length > 0)
+						for (var r = 0; r < n.parents.length; r++) {
+							var l = s[n.parents[r]];
+
+							if (l && !l.isPlumbed) {
+								0 == r ? u = l.plumb() : l.plumb();
+
+								var
+									m = l.col - n.col,
+									v = l.row - n.row;
+
+								if (0 === m && (m = r), m >= 0) {
+									var b = n.col + m;
+								}
+								else {
+									b = n.col;
+								}
+								for (var f = 1; v > f; f++) {
+									var c = h[n.row + f];
+									c && !c.isPlumbed && (c.col = b + 1, c.x = a + e * c.col, d = Math.max(c.col, d))
+								}
+						}
+						else {
+							0 == r && (u = i)
+						}
 					}
+					else{
+						u = i;
+					}
+
+					return n.isPlumbed = !0, u
+				}
 			},
 			n.draw = function() {
 				if (!n.isDone) {
@@ -168,29 +184,35 @@ function a() {
 				}
 			},
 			n.pos = function(a) {
-				var w = null;
-					var o = t.commitsList,
-							r = [n.x, n.y];
+				var
+					w = null,
+				 	o = t.commitsList,
+					r = [n.x, n.y];
+
 					return r.setColor = function(t) {
-							Number(t) === t && (r.color = m[t % m.length], r.srcColor = r.color)
+						Number(t) === t && (r.color = m[t % m.length], r.srcColor = r.color)
 					},
 					r.setColor(a && a.col), r.srcColor = m[n.col % m.length], r.color || (r.color = r.srcColor), n.colorOverride && 0 !== n.col && r.setColor(n.colorOverride), r.below = function(n) {
-							var e = o[n],
-									t = e && e.y;
-							return t || (t = o[o.length - 1].y + c), [r[0], t]
+							var
+								e = o[n],
+								t = e && e.y;
+
+						return t || (t = o[o.length - 1].y + c), [r[0], t]
 					},
 					r.right = function(t) {
-
-							return w = [r[0] + e * t, r[1] + c], a && o.length > n.row + 1 && (w[1] = o[n.row + 1].y), [r[0] - 1, r[1] + .75 * c, r[0] + e * t + 1, r[1] + .25 * c, w[0], w[1]]
+						return w = [r[0] + e * t, r[1] + c], a && o.length > n.row + 1 && (w[1] = o[n.row + 1].y), [r[0] - 1, r[1] + .75 * c, r[0] + e * t + 1, r[1] + .25 * c, w[0], w[1]]
 					},
 					r.left = function(t) {
-							return [r[0] + 1, r[1] + .75 * c, r[0] + e * t - 1, r[1] + .25 * c, r[0] + e * t, a.y]
+						return [r[0] + 1, r[1] + .75 * c, r[0] + e * t - 1, r[1] + .25 * c, r[0] + e * t, a.y]
 					}, r
 			},
 			n.curveRight = function(e, a, i) {
 				i && f(n.row + 1, n.col + a, i);
-				var o = e.right(a),
-						t = document.createElementNS(r, "path");
+
+				var
+					o = e.right(a),
+					t = document.createElementNS(r, "path");
+
 				t.setAttribute("d", "M" + e.join(",") + "C" + o.join(",")),
 				t.setAttribute("stroke-width", pathWidth),
 				t.setAttribute("stroke-opacity", 1),
@@ -202,45 +224,58 @@ function a() {
 				e[1] = o[o.length - 1]
 			},
 			n.curveLeft = function(e, a) {
-				var o = e.left(a),
-						t = document.createElementNS(r, "path");
+				var
+					o = e.left(a),
+					t = document.createElementNS(r, "path");
+
 				t.setAttribute("d", "M" + e.join(",") + "C" + o.join(","));
 				t.setAttribute("stroke-width", pathWidth);
-				t.setAttribute("stroke-opacity", 1);
+				t.setAttribute("stroke-opacity", 10);
 				t.setAttribute("opacity", 1);
 				t.setAttribute("fill", "none");
 				t.setAttribute("stroke", e.srcColor);
 				n.drawEarlier(t);
 				e[0] = o[o.length - 2];
 				e[1] = o[o.length - 1];
+			},
+			n.path = function(o, m, b, s, l) {
+				var c = t.svg,
+						u = t.commitsList;
 
-			}, n.path = function(o, m, b, s, l) {
-					var c = t.svg,
-							u = t.commitsList;
-					if (!l && s)
-							for (var d = n.row + 1; m > d; d++) f(d, b, s);
-					var a = document.createElementNS(r, "path"),
-							i = o.below(m);
-					l && n.row !== u.length - 1 && (i[0] = o[0] + 1.5 * e, i[1] = o[1] + .7 * (i[1] - o[1])),
-					a.setAttribute("d", "M" + o.join(",") + "L" + i.join(",")),
-					a.setAttribute("stroke-width", pathWidth),
-					a.setAttribute("stroke-opacity", 1),
-					l && a.setAttribute("stroke-dasharray", "15,3,3,3,3,3,3,3,3,3,3"),
-					a.setAttribute("opacity", 1),
-					s && s.col && n.col < s.col ? a.setAttribute("stroke", o.color) : a.setAttribute("stroke", o.srcColor),
-					c.appendChild(a), o[1] = i[1];
-					var g = c.getAttribute("width");
-					g < o[0] + 15 && c.setAttribute("width", o[0] + 15)
-			}, n.drawEarlier = function(r) {
-					var e = t.svg;
-					e.firstChild ? e.insertBefore(r, e.firstChild) : e.appendChild(r)
-			}, n.circle = function() {
-					var l = void 0,
-							e = n.pos(),
-							i = t.svg,
-							h = i.getAttribute("width"),
-							b = i.getAttribute("height"),
-							o = document.createElementNS(r, "rect");
+				if (!l && s) {
+					for (var d = n.row + 1; m > d; d++) {
+						f(d, b, s);
+					}
+				}
+
+				var
+					a = document.createElementNS(r, "path"),
+					i = o.below(m);
+				l && n.row !== u.length - 1 && (i[0] = o[0] + 1.5 * e, i[1] = o[1] + .7 * (i[1] - o[1])),
+				a.setAttribute("d", "M" + o.join(",") + "L" + i.join(",")),
+				a.setAttribute("stroke-width", pathWidth),
+				a.setAttribute("stroke-opacity", 1),
+				l && a.setAttribute("stroke-dasharray", "15,3,3,3,3,3,3,3,3,3,3"),
+				a.setAttribute("opacity", 1),
+				s && s.col && n.col < s.col ? a.setAttribute("stroke", o.color) : a.setAttribute("stroke", o.srcColor),
+				c.appendChild(a), o[1] = i[1];
+				var g = c.getAttribute("width");
+				g < o[0] + 15 && c.setAttribute("width", o[0] + 15);
+			},
+			n.drawEarlier = function(r) {
+				var e = t.svg;
+				e.firstChild
+					? e.insertBefore(r, e.firstChild)
+					: e.appendChild(r);
+			},
+			n.circle = function() {
+				var
+					l = void 0,
+					e = n.pos(),
+					i = t.svg,
+					h = i.getAttribute("width"),
+					b = i.getAttribute("height"),
+					o = document.createElementNS(r, "rect");
 
 					o.id = "R_" + n.sha1, o.setAttribute("x", 0),
 					o.setAttribute("y", Number(e[1] - 14)),
@@ -269,13 +304,15 @@ function a() {
 							v.textContent = " "
 					}
 					h < e[0] && i.setAttribute("width", e[0] + 10), b < e[1] && i.setAttribute("height", e[1] + 10)
-			}, n.insertTag = function(i, r, s, l, c) {
-					var o = document.getElementById("T_" + n.sha1),
-							a = r ? n.tags : n.branches,
-							t = o.insertCell(-1);
-					t.setAttribute("class", "d"), t.textContent = " " + a.join(", ");
-					var e = document.createElement("span");
-					return e.setAttribute("class", "icon"), e.textContent = r ? "\uf13b" : "\uf128", t.appendChild(e), {}
+			},
+			n.insertTag = function(i, r, s, l, c) {
+				var o = document.getElementById("T_" + n.sha1),
+						a = r ? n.tags : n.branches,
+						t = o.insertCell(-1);
+				t.setAttribute("class", "d"), t.textContent = " " + a.join(", ");
+				var e = document.createElement("span");
+
+				return e.setAttribute("class", "icon"), e.textContent = r ? "\uf13b" : "\uf128", t.appendChild(e), {}
 			}
 	}
 
@@ -342,10 +379,11 @@ function a() {
 							htmlElement: u,
 							col: 0
 					};
+
 					if (i.push(o), s[o.sha1] = o, C && (o.parents = l[1].split(" ")), l[2] && "" !== l[2].trim()) {
-							var g = h(l[2].trim());
-							o.tags = g[0],
-							o.branches = g[1];
+						var g = h(l[2].trim());
+						o.tags = g[0],
+						o.branches = g[1];
 					}
 				}
 			}
@@ -354,8 +392,7 @@ function a() {
 			}
 
 			var c = void 0;
-			for (r = 0; r < i.length; r++)
-			{
+			for (r = 0; r < i.length; r++) {
 				if (o = i[r], A(o)) {
 						c = o;
 						break
