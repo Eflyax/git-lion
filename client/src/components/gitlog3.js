@@ -1,0 +1,7 @@
+﻿export function loadData() {
+	// ----------------------------------------|11a2f51511a26a00cffb92757bb52311e89077d0|
+	return `
+b88d045e204f8e2012897904abc2df002a6a0956|bd31e3549a77c7e4d0db455b153e1c0082d65cdb fe934b39b2d87bf74e3d7421bee8cd645ea669c8|
+fe934b39b2d87bf74e3d7421bee8cd645ea669c8|bd31e3549a77c7e4d0db455b153e1c0082d65cdb|
+bd31e3549a77c7e4d0db455b153e1c0082d65cdb||`
+}

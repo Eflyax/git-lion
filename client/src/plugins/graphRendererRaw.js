@@ -192,18 +192,22 @@ function a() {
 					return r.setColor = function(t) {
 						Number(t) === t && (r.color = m[t % m.length], r.srcColor = r.color)
 					},
-					r.setColor(a && a.col), r.srcColor = m[n.col % m.length], r.color || (r.color = r.srcColor), n.colorOverride && 0 !== n.col && r.setColor(n.colorOverride), r.below = function(n) {
-							var
-								e = o[n],
-								t = e && e.y;
+					r.setColor(a && a.col),
+					r.srcColor = m[n.col % m.length],
+					r.color || (r.color = r.srcColor),
+					n.colorOverride && 0 !== n.col && r.setColor(n.colorOverride),
+					r.below = function(n) {
+						var
+							e = o[n],
+							t = e && e.y;
 
-						return t || (t = o[o.length - 1].y + c), [r[0], t]
+					return t || (t = o[o.length - 1].y + c), [r[0], t]
 					},
 					r.right = function(t) {
-						return w = [r[0] + e * t, r[1] + c], a && o.length > n.row + 1 && (w[1] = o[n.row + 1].y), [r[0] - 1, r[1] + .75 * c, r[0] + e * t + 1, r[1] + .25 * c, w[0], w[1]]
+						return w = [r[0] + e * t, r[1] + curveDeformation], a && o.length > n.row + 1 && (w[1] = o[n.row + 1].y), [r[0] - 1, r[1] + .75 * curveDeformation, r[0] + e * t + 1, r[1] + .25 * curveDeformation, w[0], w[1]]
 					},
 					r.left = function(t) {
-						return [r[0] + 1, r[1] + .75 * c, r[0] + e * t - 1, r[1] + .25 * c, r[0] + e * t, a.y]
+						return [r[0] + 1, r[1] + .75 * curveDeformation, r[0] + e * t - 1, r[1] + .25 * curveDeformation, r[0] + e * t, a.y]
 					}, r
 			},
 			n.curveRight = function(e, a, i) {
@@ -444,7 +448,7 @@ function a() {
 		"#298FB2", "#104EF4", "#7A00B5", "#CD005D", "#EB4624", "#BA9A25", "#58A927", "#b08e6a", "#91a8d0", "#f7cac9"
 	],
 	e = 20,
-	c = 35,
+	curveDeformation = 80, // curve deform
 	d = 0,
 	l = [],
 	s = Object.create(null),
@@ -456,8 +460,8 @@ function a() {
 		if (e) {
 			for (var m = e[2], f = e[0], u = 0, o = f; o < m.length; o++) {
 				e = m.item(o);
-				var c = e.getAttribute("data-commitid");
-				if (c) {
+				var curveDeformation = e.getAttribute("data-commitid");
+				if (curveDeformation) {
 					e.classList.remove("focused-commit");
 					var r = n[u];
 					if (!r || r.sha1 !== c) {
@@ -465,19 +469,31 @@ function a() {
 					}
 
 					var d = e.getElementsByClassName("commit").item(0);
-					d && (r.htmlElement = d.firstChild), r.isDone = !1, r.isPlumbed = !1, r.x = a, r.col = 0, delete r.colorOverride, u++
+					d && (r.htmlElement = d.firstChild),
+					r.isDone = !1,
+					r.isPlumbed = !1,
+					r.x = a,
+					r.col = 0,
+					delete r.colorOverride, u++;
 				}
 			}
 
-			for (u < n.length && n.splice(u, n.length - o); o < m.length; o++) e = m.item(o), e.classList.remove("focused-commit"), c = e.getAttribute("data-commitid"), c && (d = e.getElementsByClassName("commit").item(0), d && (e.id = "T_" + c, r = {
-				isDone: !1,
-				isPlumbed: !1,
-				sha1: c,
-				x: a,
-				row: n.length,
-				col: 0,
-				htmlElement: d.firstChild
-			}, n.push(r), s[r.sha1] = r));
+			for (u < n.length && n.splice(u, n.length - o); o < m.length; o++)  {
+				e = m.item(o),
+				e.classList.remove("focused-commit"),
+				curveDeformation = e.getAttribute("data-commitid"),
+				curveDeformation && (d = e.getElementsByClassName("commit").item(0),
+				d && (e.id = "T_" + curveDeformation,
+				r = {
+					isDone: !1,
+					isPlumbed: !1,
+					sha1: curveDeformation,
+					x: a,
+					row: n.length,
+					col: 0,
+					htmlElement: d.firstChild
+				}, n.push(r), s[r.sha1] = r));
+			}
 		}
 	};
 
