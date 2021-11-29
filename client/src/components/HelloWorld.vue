@@ -7,8 +7,8 @@
 <script>
 import * as renderer from "./../plugins/graphRendererRaw.js";
 // import {loadData} from './gitlog.js';
-// import {loadData} from './gitlog2_docs.js';
-import {loadData} from './gitlog3.js';
+import {loadData} from './gitlog2_docs.js';
+// import {loadData} from './gitlog3.js';
 
 export default {
 	name: "HelloWorld",

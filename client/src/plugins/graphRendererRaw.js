@@ -1,5 +1,5 @@
 ﻿var
-	pathWidth = 4,
+	pathWidth = 2,
 	nodeSize = 7;
 
 function o(t) {
@@ -94,6 +94,7 @@ function a() {
 
 			n.pathsDrawn = Object.create(null),
 			n.drawPathTo = function(t) {
+
 				if (!n.pathsDrawn[t.sha1]) {
 					n.pathsDrawn[t.sha1] = !0;
 
@@ -107,9 +108,12 @@ function a() {
 								var v = l[n.row + m];
 
 								if (r === v.col) {
-									f = !0, b = !0, r++;
+									f = !0,
+									b = !0,
+									r++;
 									break;
 								}
+
 								var c = u(n.row + m, r);
 								if (c && c !== t) {
 									f = !0, b = !0, r++;
@@ -119,13 +123,31 @@ function a() {
 								b || (g = !0)
 						}
 						var o = n.pos(t);
+
 						if (f) {
-								d = Math.max(d, r), c = u(n.row, r);
+								d = Math.max(d, r),
+								c = u(n.row, r);
 								var h = n.prevParent(t),
 										y = t.col;
 								if (h) var y = h.col + 1;
-								t == u(n.row, y) ? (o = n.pos(l[n.row + 1]), r = t.col, o.setColor(t.col), n.curveLeft(o, t.col - n.col, t), n.path(o, t.row + 1, t.col, t)) : (p(i) || c && c !== i ? (o.setColor(r), n.curveRight(o, r - n.col, t)) : (n.col = r, n.x = a + e * n.col, s = t.col - n.col, o = n.pos(t)), o.setColor(r), n.path(o, t.row - 1, r, t), n.curveLeft(o, t.col - r, t)), t.colorOverride = r
-						} else s > 0 ? (n.curveRight(o, s, t), n.path(o, t.row, r, t)) : 0 > s ? (n.path(o, t.row - 1, r, t), n.curveLeft(o, s, t)) : n.path(o, t.row, r, t)
+								t == u(n.row, y) ? (o = n.pos(l[n.row + 1]),
+								r = t.col,
+								o.setColor(t.col),
+								n.curveLeft(o, t.col - n.col, t),
+								n.path(o, t.row + 1, t.col, t)) : (p(i) || c && c !== i ? (o.setColor(r),
+								n.curveRight(o, r - n.col, t)) : (n.col = r, n.x = a + e * n.col,
+								s = t.col - n.col,
+								o = n.pos(t)),
+								o.setColor(r),
+								n.path(o, t.row - 1, r, t),
+								n.curveLeft(o, t.col - r, t)),
+								t.colorOverride = r
+						}
+						else {
+							s > 0 ? (n.curveRight(o, s, t),
+							n.path(o, t.row, r, t)) : 0 > s ? (n.path(o, t.row - 1, r, t),
+							n.curveLeft(o, s, t)) : n.path(o, t.row, r, t)
+						}
 				}
 			},
 			n.prevParent = function(e) {
@@ -215,32 +237,50 @@ function a() {
 
 				var
 					o = e.right(a),
-					t = document.createElementNS(r, "path");
+					t = document.createElementNS(r, "path"),
+					xStart = e[0],
+					yStart = e[1];
 
-				t.setAttribute("d", "M" + e.join(",") + "C" + o.join(",")),
+				e[0] = o[o.length - 2];
+				e[1] = o[o.length - 1];
+
+				var
+					xEnd = e[0],
+					yEnd = e[1];
+
+				var pathString = "M" + xStart + "," + yStart + "C" +  xEnd + "," + (yStart+5) + " " + xEnd + "," + (yStart - 5) + "  " + xEnd + "," + yEnd;
+
+				t.setAttribute("d", pathString);
 				t.setAttribute("stroke-width", pathWidth),
 				t.setAttribute("stroke-opacity", 1),
 				t.setAttribute("opacity", 1),
 				t.setAttribute("fill", "none"),
-				t.setAttribute("stroke", e.color),
-				n.drawEarlier(t),
-				e[0] = o[o.length - 2],
-				e[1] = o[o.length - 1]
+				t.setAttribute("stroke", e.srcColor),
+				n.drawEarlier(t);
 			},
 			n.curveLeft = function(e, a) {
 				var
 					o = e.left(a),
-					t = document.createElementNS(r, "path");
+					t = document.createElementNS(r, "path"),
+					xStart = e[0],
+					yStart = e[1];
 
-				t.setAttribute("d", "M" + e.join(",") + "C" + o.join(","));
+					e[0] = o[o.length - 2];
+					e[1] = o[o.length - 1];
+
+					var
+						xEnd = e[0],
+						yEnd = e[1];
+
+				var pathString = "M" + xStart + "," + yStart + "C" +  xStart + "," + (yEnd+5) + " " + (xStart) + "," + yEnd + "  " + xEnd + "," + yEnd;
+
+				t.setAttribute("d", pathString);
 				t.setAttribute("stroke-width", pathWidth);
 				t.setAttribute("stroke-opacity", 10);
 				t.setAttribute("opacity", 1);
 				t.setAttribute("fill", "none");
 				t.setAttribute("stroke", e.srcColor);
 				n.drawEarlier(t);
-				e[0] = o[o.length - 2];
-				e[1] = o[o.length - 1];
 			},
 			n.path = function(o, m, b, s, l) {
 				var c = t.svg,
@@ -300,7 +340,7 @@ function a() {
 					background.setAttribute("stroke", "none"),
 					background.setAttribute("stroke-width", 0),
 					background.setAttribute("fill", e.color);
-					background.setAttribute("opacity", 0.3);
+					background.setAttribute("opacity", 0.15);
 					//
 					var a = document.createElementNS(r, "circle");
 					a.id = "C_" + n.sha1,
@@ -445,14 +485,23 @@ function a() {
 		}
 	}
 	var m = [
-		"#298FB2", "#104EF4", "#7A00B5", "#CD005D", "#EB4624", "#BA9A25", "#58A927", "#b08e6a", "#91a8d0", "#f7cac9"
+		"#298FB2",
+		"#104EF4",
+		"#7A00B5",
+		"#CD005D",
+		"#EB4624",
+		"#BA9A25",
+		"#58A927",
+		"#b08e6a",
+		"#91a8d0",
+		"#f7cac9"
 	],
 	e = 20,
-	curveDeformation = 80, // curve deform
+	curveDeformation = 35, // curve deform
 	d = 0,
 	l = [],
 	s = Object.create(null),
-	a = 40, // padding left
+	a = 540, // padding left
 	b = function() {
 		var n = t.commitsList;
 		l = [];
@@ -460,10 +509,13 @@ function a() {
 		if (e) {
 			for (var m = e[2], f = e[0], u = 0, o = f; o < m.length; o++) {
 				e = m.item(o);
+
 				var curveDeformation = e.getAttribute("data-commitid");
+
 				if (curveDeformation) {
 					e.classList.remove("focused-commit");
 					var r = n[u];
+
 					if (!r || r.sha1 !== c) {
 						break;
 					}
@@ -478,21 +530,24 @@ function a() {
 				}
 			}
 
-			for (u < n.length && n.splice(u, n.length - o); o < m.length; o++)  {
+			for (u < n.length && n.splice(u, n.length - o); o < m.length; o++) {
 				e = m.item(o),
 				e.classList.remove("focused-commit"),
 				curveDeformation = e.getAttribute("data-commitid"),
-				curveDeformation && (d = e.getElementsByClassName("commit").item(0),
-				d && (e.id = "T_" + curveDeformation,
-				r = {
-					isDone: !1,
-					isPlumbed: !1,
-					sha1: curveDeformation,
-					x: a,
-					row: n.length,
-					col: 0,
-					htmlElement: d.firstChild
-				}, n.push(r), s[r.sha1] = r));
+				curveDeformation && (
+					d = e.getElementsByClassName("commit").item(0),
+					d && (e.id = "T_" + curveDeformation,
+					r = {
+						isDone: !1,
+						isPlumbed: !1,
+						sha1: curveDeformation,
+						x: a,
+						row: n.length,
+						col: 0,
+						htmlElement: d.firstChild
+					},
+					n.push(r), s[r.sha1] = r)
+				);
 			}
 		}
 	};
