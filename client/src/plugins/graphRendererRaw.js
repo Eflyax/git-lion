@@ -19,17 +19,31 @@ function n() {
 	var e = document.getElementById("bit-booster");
 	e || (e = document.createElementNS(r, "svg"), e.setAttribute("xmlns:xlink", "http://www.w3.org/1999/xlink"), e.setAttribute("width", 25), e.setAttribute("height", 20), e.setAttribute("text-rendering", "optimizeLegibility"), e.setAttributeNS("http://www.w3.org/1999/xhtml", "style", "border: 0px; margin: 0px; padding: 0;"), e.id = "bit-booster"), t.svg = e;
 	var o = document.getElementById("bit-booster-tbl");
-	if (o) t.tdL || (t.tdL = o.getElementsByTagName("td").item(0)), t.tdL.appendChild(e);
+
+	if (o) {
+		t.tdL || (t.tdL = o.getElementsByTagName("td").item(0));
+		t.tdL.appendChild(e);
+	}
 	else {
 			var a = document.getElementsByClassName("commits-content").item(0);
-			a || (a = document.getElementById("compare-content")), o = document.createElement("table"), o.id = "bit-booster-tbl", o.style.width = "1%";
-			var i = o.insertRow(),
-					n = i.insertCell(-1),
-					s = i.insertCell(-1),
-					style = null;
+
+			a || (a = document.getElementById("compare-content"));
+			o = document.createElement("table");
+			o.id = "bit-booster-tbl";
+			o.style.width = "1%";
+
+			var
+				i = o.insertRow(),
+				n = i.insertCell(-1),
+				s = i.insertCell(-1),
+				style = null;
 
 			n.style.verticalAlign = "top", s.style.width = "99%", s.style.verticalAlign = "top", a.appendChild(o),
-			style = document.createElement("style"), style.setAttribute("type", "text/css"), style.textContent = '\n        @font-face {\n            font-family: "Atlassian Icons";\n            src: url(http://aui-cdn.atlassian.com/aui-adg/5.9.6/css/fonts/atlassian-icons.eot);\n            src: url(http://aui-cdn.atlassian.com/aui-adg/5.9.6/css/fonts/atlassian-icons.eot?#iefix) format("embedded-opentype"), url(http://aui-cdn.atlassian.com/aui-adg/5.9.6/css/fonts/atlassian-icons.woff) format("woff"), url(http://aui-cdn.atlassian.com/aui-adg/5.9.6/css/fonts/atlassian-icons.ttf) format("truetype"), url(http://aui-cdn.atlassian.com/aui-adg/5.9.6/css/fonts/atlassian-icons.svg#atlassian-icons) format("svg");\n            font-weight: normal;\n            font-style: normal;\n        }\n        #bit-booster-tbl, #bit-booster-tbl * { line-height: 1.0; font-family: monospace; border-spacing: 0; margin:0; border: 0; padding: 0; font-size: 16px;}\n        #bit-booster-tbl span.icon { font-family: "Atlassian Icons"; font-size: 16px; padding-left: 2px; }\n        #bit-booster-tbl td.d { font-style: italic; color: darkgray; padding-left: 0.7em; white-space: nowrap; }\n        #bit-booster-tbl td.commit { padding: 4px 1px; }\n', n.appendChild(e), n.setAttribute("rowspan", 99999), t.tdL = n, t.style = style
+			style = document.createElement("style"), style.setAttribute("type", "text/css"), style.textContent = '\n        @font-face {\n            font-family: "Atlassian Icons";\n            src: url(http://aui-cdn.atlassian.com/aui-adg/5.9.6/css/fonts/atlassian-icons.eot);\n            src: url(http://aui-cdn.atlassian.com/aui-adg/5.9.6/css/fonts/atlassian-icons.eot?#iefix) format("embedded-opentype"), url(http://aui-cdn.atlassian.com/aui-adg/5.9.6/css/fonts/atlassian-icons.woff) format("woff"), url(http://aui-cdn.atlassian.com/aui-adg/5.9.6/css/fonts/atlassian-icons.ttf) format("truetype"), url(http://aui-cdn.atlassian.com/aui-adg/5.9.6/css/fonts/atlassian-icons.svg#atlassian-icons) format("svg");\n            font-weight: normal;\n            font-style: normal;\n        }\n        #bit-booster-tbl, #bit-booster-tbl * { line-height: 1.0; font-family: monospace; border-spacing: 0; margin:0; border: 0; padding: 0; font-size: 16px;}\n        #bit-booster-tbl span.icon { font-family: "Atlassian Icons"; font-size: 16px; padding-left: 2px; }\n        #bit-booster-tbl td.d { font-style: italic; color: darkgray; padding-left: 0.7em; white-space: nowrap; }\n        #bit-booster-tbl td.commit { padding: 4px 1px; }\n';
+			n.appendChild(e);
+			n.setAttribute("rowspan", 99999);
+			t.tdL = n;
+			t.style = style
 	}
 }
 
@@ -214,8 +228,10 @@ function a() {
 			var i = t.commitsList,
 					b = y.trim().split("\n");
 			n();
+
 			for (var r = 0; r < b.length; r++) {
 					var l = b[r];
+
 					if ("" !== l.trim()) {
 							l = l.split("|");
 							var d = l[0],
@@ -223,7 +239,8 @@ function a() {
 									w = document.getElementById("bit-booster-tbl"),
 									m = w.insertRow(),
 									u = m.insertCell(-1);
-							m.id = "T_" + d, m.setAttribute("data-commitid", d), u.setAttribute("class", "commit"), u.textContent = d;
+							m.id = "T_" + d, m.setAttribute("data-commitid", d);
+							u.setAttribute("class", "commit"), u.textContent = d.substr(0, 6);
 							var o = {
 									isDone: !1,
 									isPlumbed: !1,
@@ -245,17 +262,23 @@ function a() {
 					if (o = i[r], A(o)) {
 							c = o;
 							break
-					} for (c || (c = i[0]), r = 0; r < (c ? c.row : i.length); r++) o = i[r], o.col++, o.x = a + e * o.col, f(r, 0, c), console.log("Storing: " + c.sha1 + " at row=" + r);
-			if (c) {
+					} for (c || (c = i[0]), r = 0; r < (c ? c.row : i.length); r++) o = i[r], o.col++, o.x = a + e * o.col, f(r, 0, c);
+
+				if (c) {
 					var p = c.plumb();
-					if (p)
-							for (r = p.row + 1; r < i.length; r++) o = i[r], 0 === o.col && (o.col++, o.x = a + e * o.col)
+					if (p) {
+						for (r = p.row + 1; r < i.length; r++) {
+							o = i[r], 0 === o.col && (o.col++, o.x = a + e * o.col)
+						}
+					}
 			}
 			for (r = 0; r < i.length; r++) i[r].plumb();
 			for (r = i.length - 1; r >= 0; r--) i[r].draw();
 			for (r = i.length - 1; r >= 0; r--) i[r].circle()
 	}
-	var m = ["#034f84", "#79c753", "#f7786b", "#fae03c", "#98ddde", "#9896a4", "#dc4132", "#b08e6a", "#91a8d0", "#f7cac9"],
+	var m = [
+		"#298FB2", "#104EF4", "#7A00B5", "#CD005D", "#EB4624", "#BA9A25", "#58A927", "#b08e6a", "#91a8d0", "#f7cac9"
+	],
 			e = 15,
 			c = 35,
 			d = 0,
@@ -289,6 +312,7 @@ function a() {
 							}, n.push(r), s[r.sha1] = r))
 					}
 			};
+
 	return b.g = g, b.commitsTable = s, b
 }
 
