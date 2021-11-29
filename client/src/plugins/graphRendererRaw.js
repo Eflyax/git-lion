@@ -286,24 +286,44 @@ function a() {
 					o.setAttribute("fill", "transparent"),
 					i.appendChild(o);
 
+					// todo
+					var background = document.createElementNS(r, "rect");
+					background.id = "R_" + n.sha1,
+					background.setAttribute("x", e[0]),
+					background.setAttribute("y", e[1] - nodeSize),
+					background.setAttribute("width", "100%"),
+					background.setAttribute("height", nodeSize * 2),
+					background.setAttribute("stroke", "none"),
+					background.setAttribute("stroke-width", 0),
+					background.setAttribute("fill", e.color);
+					background.setAttribute("opacity", 0.3);
+					//
 					var a = document.createElementNS(r, "circle");
-					a.id = "C_" + n.sha1, a.setAttribute("cx", e[0]),
+					a.id = "C_" + n.sha1,
+					a.setAttribute("cx", e[0]),
 					a.setAttribute("cy", e[1]),
 					a.setAttribute("r", nodeSize),
 					a.setAttribute("fill", e.color),
 					a.setAttribute("stroke", "none"),
+
+					i.appendChild(background);
 					i.appendChild(a);
 
-					var s = n.tags && n.tags.length > 0,
-							m = n.branches && n.branches.length > 0,
-							u = s && m,
-							f = void 0;
-					m && (f = n.insertTag(e, !1, u, l)), s && n.insertTag(e, !0, u, l, f);
+					var
+						s = n.tags && n.tags.length > 0,
+						m = n.branches && n.branches.length > 0,
+						u = s && m,
+						f = void 0;
+
+					m && (f = n.insertTag(e, !1, u, l)),
+					s && n.insertTag(e, !0, u, l, f);
+
 					for (var d = document.getElementById("T_" + n.sha1), g = d.getElementsByTagName("td"), c = g.length - 1; 3 > c; c++) {
-							var v = d.insertCell(-1);
-							v.textContent = " "
+						var v = d.insertCell(-1);
+						v.textContent = " ";
 					}
-					h < e[0] && i.setAttribute("width", e[0] + 10), b < e[1] && i.setAttribute("height", e[1] + 10)
+					h < e[0] && i.setAttribute("width", e[0] + 10),
+					b < e[1] && i.setAttribute("height", e[1] + 10);
 			},
 			n.insertTag = function(i, r, s, l, c) {
 				var o = document.getElementById("T_" + n.sha1),
