@@ -10,14 +10,28 @@
 
 function i() {
 	var e = document.getElementById("commits-table");
-	if (e || (e = document.getElementById("compare-commits-table")), !e) return null;
-	for (var r = e.getElementsByTagName("tr"), o = 0, t = r.item(o); t && !t.getAttribute("data-commitid");) t = r.item(++o);
+	if (e || (e = document.getElementById("compare-commits-table")), !e) {
+		return null;
+	}
+
+	for (var r = e.getElementsByTagName("tr"), o = 0, t = r.item(o); t && !t.getAttribute("data-commitid");) {
+		t = r.item(++o);
+	}
+
 	return t && [o, t, r, t.getAttribute("data-commitid")]
 }
 
 function n() {
 	var e = document.getElementById("bit-booster");
-	e || (e = document.createElementNS(r, "svg"), e.setAttribute("xmlns:xlink", "http://www.w3.org/1999/xlink"), e.setAttribute("width", 25), e.setAttribute("height", 20), e.setAttribute("text-rendering", "optimizeLegibility"), e.setAttributeNS("http://www.w3.org/1999/xhtml", "style", "border: 0px; margin: 0px; padding: 0;"), e.id = "bit-booster"), t.svg = e;
+
+	e || (
+		e = document.createElementNS(r, "svg"),
+		e.setAttribute("width", 60),
+		e.setAttribute("height", 120),
+		e.setAttribute("text-rendering", "optimizeLegibility"),
+		e.id = "bit-booster"
+		), t.svg = e;
+
 	var o = document.getElementById("bit-booster-tbl");
 
 	if (o) {
