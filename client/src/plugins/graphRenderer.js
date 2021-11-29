@@ -362,9 +362,9 @@ function dg(l) {
 		n = document.createElement("a");
 	n.href = URL.createObjectURL(h), n.download = "graph.svg", n.textContent = "graph.svg";
 
-	for (var o = document.getElementById("download"); o.firstChild;) {
-		o.removeChild(o.firstChild);
-	}
+	// for (var o = document.getElementById("download"); o.firstChild;) {
+	// 	o.removeChild(o.firstChild);
+	// }
 }
 
 function cg() {

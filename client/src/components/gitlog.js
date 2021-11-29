@@ -1,4 +1,5 @@
-﻿76d70c7|f8a96b4| (HEAD -> feature/ci, origin/feature/ci)
+﻿export function loadData() {
+	return `76d70c7|f8a96b4| (HEAD -> feature/ci, origin/feature/ci)
 f8a96b4|f071907|
 c2384fc|636d87e 1c77e10| (refs/stash)
 1c77e10|636d87e|
@@ -317,4 +318,5 @@ b68db28|57144e9|
 1ff8a57|b88d045|
 b88d045|bd31e35 fe934b3|
 fe934b3|bd31e35|
-bd31e35||
+bd31e35||`;
+}

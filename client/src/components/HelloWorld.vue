@@ -1,10 +1,9 @@
 <template>
-	<v-container>
 		<table width="100%">
 			<tbody>
 				<tr>
 					<td rowspan="2" style="padding-right: 75px; vertical-align: top">
-						<v-btn @click="startDrawing">Draw Commit Graph</v-btn>
+						<!-- <v-btn @click="startDrawing">Draw Commit Graph</v-btn> -->
 						<br />
 						<textarea rows="35" cols="60" id="data" wrap="soft">
 76d70c7|f8a96b4| (HEAD -> feature/ci, origin/feature/ci)
@@ -331,24 +330,16 @@ bd31e35||
 						<br />&nbsp;<br /><br />
 					</td>
 					<td width="60%" class="commits-content">
-						<div id="download">
-							Download Graph: &nbsp; &nbsp; &nbsp;
-							<a
-								href="blob:http://bit-booster.com/fcfbe8bc-08a7-4a38-bd61-4cae4ba6691e"
-								download="graph.svg"
-								>graph.svg</a
-							>
-						</div>
 						<table id="bit-booster-tbl" style="width: 1%"></table>
 					</td>
 				</tr>
 			</tbody>
 		</table>
-	</v-container>
 </template>
 
 <script>
-import * as renderer from "./../plugins/graphRenderer.js";
+import * as renderer from "./../plugins/graphRendererRaw.js";
+import {loadData} from './gitlog.js';
 
 export default {
 	name: "HelloWorld",
@@ -357,7 +348,7 @@ export default {
 	},
 	methods: {
 		startDrawing() {
-			window.drawGraph(document.getElementById('data').value);
+			window.drawGraph(loadData());
 		},
 	},
 };
@@ -366,5 +357,11 @@ export default {
 <style>
 * {
 	color: gray;
+}
+.d {
+	font-style: italic;
+	color: darkgray;
+	padding-left: 0.7em;
+	white-space: nowrap;
 }
 </style>
