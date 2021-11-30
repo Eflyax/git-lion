@@ -253,7 +253,7 @@ function a() {
 					xEnd = e[0],
 					yEnd = e[1];
 
-				var pathString = "M" + xStart + "," + yStart + "C" +  xEnd + "," + (yStart+5) + " " + xEnd + "," + (yStart - 5) + "  " + xEnd + "," + yEnd;
+				var pathString = "M" + xStart + "," + yStart + "C" +  (xEnd + 2) + "," + yStart + " " + (xEnd + 2) + "," + (yStart - 1) + "  " + xEnd + "," + yEnd;
 
 				t.setAttribute("d", pathString);
 				t.setAttribute("stroke-width", pathWidth),
@@ -273,9 +273,9 @@ function a() {
 					e[0] = o[o.length - 2];
 					e[1] = o[o.length - 1];
 
-					var
-						xEnd = e[0],
-						yEnd = e[1];
+				var
+					xEnd = e[0] + 2,
+					yEnd = e[1] + 2;
 
 				var pathString = "M" + xStart + "," + yStart + "C" +  xStart + "," + (yEnd+5) + " " + (xStart) + "," + yEnd + "  " + xEnd + "," + yEnd;
 
@@ -436,10 +436,12 @@ function a() {
 					C = l[1] && "" !== l[1].trim(),
 					table = document.getElementById("bit-booster-tbl"),
 					row = table.insertRow(),
-					u = row.insertCell(-1);
+					// u = row.insertCell(-1);
+					insertedCell = row.insertCell(-1);
 					row.id = "T_" + d, row.setAttribute("data-commitid", d);
 
-				u.setAttribute("class", "commit"), u.textContent = d.substr(0, 3);
+				insertedCell.setAttribute("class", "commit"),
+				insertedCell.textContent = d.substr(0, 3);
 
 				var o = {
 						isDone: !1,
@@ -447,7 +449,7 @@ function a() {
 						sha1: d,
 						x: a,
 						row: i.length,
-						htmlElement: u,
+						htmlElement: insertedCell,
 						col: 0
 				};
 

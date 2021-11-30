@@ -33,6 +33,7 @@ body,html {
 }
 .d {
 	color: #C2C2C3;
+	font-size: 12px;
 	padding-left: 0.7em;
 	white-space: nowrap;
 }
