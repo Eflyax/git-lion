@@ -5,10 +5,11 @@
 </template>
 
 <script>
-import * as renderer from "./../plugins/graphRendererRaw.js";
+import * as renderer from "./../plugins/graphRenderer.js";
 // import {loadData} from './gitlog.js';
-import {loadData} from './gitlog2_docs.js';
+// import {loadData} from './gitlog2_docs.js';
 // import {loadData} from './gitlog3.js';
+import {loadData} from './gitCommitMessage.js';
 
 export default {
 	name: "HelloWorld",
@@ -31,8 +32,7 @@ body,html {
 	color:#C2C2C3;
 }
 .d {
-	font-style: italic;
-	color: darkgray;
+	color: #C2C2C3;
 	padding-left: 0.7em;
 	white-space: nowrap;
 }
