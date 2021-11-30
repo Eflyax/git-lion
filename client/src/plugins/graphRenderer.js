@@ -335,13 +335,14 @@ function a() {
 					o.setAttribute("fill", "transparent"),
 					i.appendChild(o);
 
+					// console.log(n.isMerge);
 					// todo
 					var background = document.createElementNS(r, "rect");
 					background.id = "R_" + n.sha1,
 					background.setAttribute("x", e[0]),
 					background.setAttribute("y", e[1] - nodeSize),
 					background.setAttribute("width", "100%"),
-					background.setAttribute("height", nodeSize * 2),
+					background.setAttribute("height",  nodeSize * 2),
 					background.setAttribute("stroke", "none"),
 					background.setAttribute("stroke-width", 0),
 					background.setAttribute("fill", e.color);
@@ -352,7 +353,7 @@ function a() {
 					a.id = "C_" + n.sha1,
 					a.setAttribute("cx", e[0]),
 					a.setAttribute("cy", e[1]),
-					a.setAttribute("r", nodeSize),
+					a.setAttribute("r", n.isMerge ? (nodeSize / 2) : nodeSize),
 					a.setAttribute("fill", e.color),
 					a.setAttribute("stroke", "none"),
 
@@ -372,6 +373,7 @@ function a() {
 						var v = d.insertCell(-1);
 						v.textContent = " ";
 					}
+
 					h < e[0] && i.setAttribute("width", e[0] + 10),
 					b < e[1] && i.setAttribute("height", e[1] + 10);
 			},
@@ -436,12 +438,14 @@ function a() {
 					C = l[1] && "" !== l[1].trim(),
 					table = document.getElementById("bit-booster-tbl"),
 					row = table.insertRow(),
-					// u = row.insertCell(-1);
 					insertedCell = row.insertCell(-1);
 					row.id = "T_" + d, row.setAttribute("data-commitid", d);
 
 				insertedCell.setAttribute("class", "commit"),
 				insertedCell.textContent = d.substr(0, 3);
+
+				var commitMessage = l[2];
+
 
 				var o = {
 						isDone: !1,
@@ -450,7 +454,8 @@ function a() {
 						x: a,
 						row: i.length,
 						htmlElement: insertedCell,
-						col: 0
+						col: 0,
+						isMerge: commitMessage.includes('Merge branch ')
 				};
 
 				if (i.push(o), s[o.sha1] = o, C && (o.parents = l[1].split(" ")), l[2] && "" !== l[2].trim()) {
