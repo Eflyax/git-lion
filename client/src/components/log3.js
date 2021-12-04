@@ -1,5 +1,4 @@
 ﻿export function loadData() {
-	// ----------------------------------------|11a2f51511a26a00cffb92757bb52311e89077d0|
 	return `
 76d70c761194606d8cdd0297fe2015e34e17f299|f8a96b4885fb5ecb5387da5718d22d3c16f15bdd| (origin/feature/ci, feature/ci)
 f8a96b4885fb5ecb5387da5718d22d3c16f15bdd|f07190790c6b07a3da892372684e019455566ae7|

@@ -6,22 +6,22 @@
 
 <script>
 import * as renderer from "./../plugins/graphRenderer.js";
-// import {loadData} from './gitlog.js';
-// import {loadData} from './gitlog2_docs.js';
-// import {loadData} from './gitlog3.js';
-import {loadData} from './gitCommitMessage.js';
 
-export default {
-	name: "HelloWorld",
+export const Graph = {
+	name: "Graph",
 	mounted() {
 		this.startDrawing();
 	},
 	methods: {
-		startDrawing() {
-			window.drawGraph(loadData());
+		async startDrawing() {
+			const log = await import('./' + this.$route.params.slug);
+
+			window.drawGraph(log.loadData());
 		},
 	},
 };
+
+export default Graph;
 </script>
 
 <style>

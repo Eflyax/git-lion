@@ -516,7 +516,7 @@ function a() {
 	d = 0,
 	l = [],
 	s = Object.create(null),
-	a = 540, // padding left
+	a = nodeSize, // padding left
 	b = function() {
 		var n = t.commitsList;
 		l = [];
