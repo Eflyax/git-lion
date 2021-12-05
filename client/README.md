@@ -10,4 +10,5 @@
 
 ## Run cypress test
 
-???
+`npx cypress run`
+

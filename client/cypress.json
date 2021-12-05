@@ -1,0 +1,13 @@
+{
+"ignoreTestFiles": [
+    "**/__snapshots__/*",
+    "**/__image_snapshots__/*"
+],
+"env": {
+    "cypress-plugin-snapshots" : {
+      "imageConfig": {
+        "treshold": 0.01
+      }
+    }
+  } 
+}
