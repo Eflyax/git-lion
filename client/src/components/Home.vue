@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts">
-import {useGitLog} from './../composables/useGitLog/index';
+import {useGitLog} from '@composables';
 
 export const Home = {
 	name: "Home",

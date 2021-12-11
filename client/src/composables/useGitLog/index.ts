@@ -6,7 +6,7 @@ const state = reactive({
 
 export const useGitLog = () => {
 	const
-		load = async(parameters): Promise<void> => {
+		load = async(): Promise<void> => {
 			state.gitLog = {foo: 'bar'};
 		};
 
