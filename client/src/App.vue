@@ -3,7 +3,7 @@
 		<v-app-bar density="compact">
 			<v-app-bar-title>GitLion</v-app-bar-title>
 
-			<v-btn color="secondary">
+			<v-btn color="secondary" @click="load">
 				vuepress
 			</v-btn>
 
@@ -26,6 +26,8 @@
 
 		<v-main>
 			<toolbar />
+gitLog: <br>
+			{{ gitLog }}
 			<router-view />
 		</v-main>
 	</v-app>
@@ -33,16 +35,24 @@
 
 <script>
 import toolbar from './components/Toolbar.vue';
+import {useGitLog} from './composables/useGitLog/index';
 
 export default {
 	name: 'App',
-
 	components: {
 		toolbar
 	},
+	setup() {
+		const {load, gitLog} = useGitLog();
 
+		return {
+			load,
+			gitLog
+		};
+	},
 	data: () => ({
 		//
 	}),
+
 }
 </script>

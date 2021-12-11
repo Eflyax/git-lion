@@ -1,14 +1,30 @@
 <template>
 	<div class="body">
 		<div class="left-panel"></div>
-		<div class="graph"></div>
+		<div class="graph">
+			graf
+			<v-btn @click="load">Test</v-btn>
+
+			gitLog: <br>
+			{{ gitLog }}
+		</div>
 		<div class="sidebar"></div>
 	</div>
 </template>
 
 <script lang="ts">
+import {useGitLog} from './../composables/useGitLog/index';
+
 export const Home = {
 	name: "Home",
+	setup() {
+		const {load, gitLog} = useGitLog();
+
+		return {
+			load,
+			gitLog
+		}
+	},
 	data() {
 		return {
 		};
